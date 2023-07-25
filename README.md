@@ -10,3 +10,8 @@ CS공부를 하면서 정리한 부분입니다! 계속해서 추가 예정입�
 - [Process와 Thread의 차이](https://github.com/minsu20/CS_Study/tree/minsu/OS/Process%20vs%20Thread)
 - [컨텍스트 스위칭](https://github.com/minsu20/CS_Study/tree/minsu/OS/Context-Switching)
 - [동기와 비동기 / 블로킹과 논블로킹 차이](https://github.com/minsu20/CS_Study/tree/minsu/OS/Synchronous%20vs%20Asynchronous%20%3A%20Blocking%20vs%20Non-blocking)
+- [뮤텍스와 세마포어](https://github.com/minsu20/CS_Study/tree/minsu/OS/Mutex%20vs%20Semaphore)
+
+# 📁 데이터베이스
+- [인덱스](https://github.com/minsu20/CS_Study/tree/minsu/DataBase/Index)
+- [트랜잭션](https://github.com/minsu20/CS_Study/tree/minsu/DataBase/Transaction)
