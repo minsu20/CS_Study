@@ -1,5 +1,3 @@
-# Array vs Linked List
-
 ![image](https://github.com/minsu20/CS_Study/assets/86006389/684e7685-fe0c-4b20-a003-961639929ee5)
 
 
