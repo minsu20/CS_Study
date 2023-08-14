@@ -1,69 +1,59 @@
 # 팩토리 패턴(Factory Pattern)
 
 
-## **팩토리 패턴의 정의**
+### **1. 팩토리 메서드 패턴 (Factory Method Pattern)**
 
-팩토리 패턴은 객체를 생성하는 방법을 캡슐화하는 디자인 패턴이다. 이 패턴은 객체를 생성하는 코드와 이를 사용하는 코드를 분리하여, 높은 유연성과 확장성을 제공한다. 클래스의 인스턴스를 생성하는 인터페이스를 제공하여 어떤 클래스의 인스턴스를 만들지는 서브클래스가 결정하도록 한다. 이를 통해 코드는 특정 클래스의 인스턴스를 생성하는 대신에 인터페이스를 통해 생성된 객체를 사용하게 된다.
+- **목적**: 객체 생성의 책임을 서브 클래스에 위임한다. 이를 통해 클라이언트는 구체적인 클래스를 알 필요 없이 객체를 생성할 수 있다.
+- **구성**:
+    - **Creator**: 객체를 생성하는 추상 클래스나 인터페이스로, 팩토리 메서드를 정의한다.
+    - **ConcreteCreator**: Creator 클래스를 상속받아 팩토리 메서드를 구현하는 클래스이다.
+    - **Product**: 생성될 객체의 추상 클래스나 인터페이스이다.
+    - **ConcreteProduct**: Product 클래스를 상속받아 구체적인 객체를 생성하는 클래스이다.
 
-```java
-javaCopy code
-public interface Animal {
-    void speak();
-}
+![image](https://github.com/minsu20/CS_Study/assets/86006389/cd4699d7-5e87-4456-85e5-72f2ff500f44)
 
-public class Dog implements Animal {
-    @Override
-    public void speak() {
-        System.out.println("Woof!");
-    }
-}
+**장점:**
 
-public class Cat implements Animal {
-    @Override
-    public void speak() {
-        System.out.println("Meow!");
-    }
-}
+1. **유연성**: 객체 생성 코드와 사용 코드를 분리하여 시스템의 유연성을 향상시킨다.
+2. **확장성**: 새로운 제품 클래스를 쉽게 추가할 수 있다.
 
-public class AnimalFactory {
-    public Animal createAnimal(String type) {
-        if ("dog".equals(type)) {
-            return new Dog();
-        } else if ("cat".equals(type)) {
-            return new Cat();
-        }
-        return null;
-    }
-}
+**단점:**
 
-public class Main {
-    public static void main(String[] args) {
-        AnimalFactory animalFactory = new AnimalFactory();
+1. **클래스 수 증가**: 각 제품마다 팩토리 클래스가 필요하여 클래스 수가 늘어날 수 있다.
 
-        Animal dog = animalFactory.createAnimal("dog");
-        dog.speak();  // Outputs "Woof!"
 
-        Animal cat = animalFactory.createAnimal("cat");
-        cat.speak();  // Outputs "Meow!"
-    }
-}
+**예시**
+![image](https://github.com/minsu20/CS_Study/assets/86006389/eac383c2-13a0-49c7-885e-d8c8c367a745)
 
-```
+### **2. 추상 팩토리 패턴 (Abstract Factory Pattern)**
 
-위의 코드에서 **`AnimalFactory`** 는 팩토리 클래스로, 특정 타입의 **`Animal`** 객체를 생성하는 **`createAnimal()`** 메서드를 제공합니다. 이 메서드를 통해 **`Dog`** 와 **`Cat`** 객체를 생성하고 있다.
+- **목적**: 관련된 객체의 집합을 생성하기 위한 인터페이스를 제공한다. 이를 통해 시스템이 새로운 제품 집합을 쉽게 통합하거나 교체할 수 있도록 한다.
+- **구성**:
+    - **AbstractFactory**: 여러 팩토리 메서드를 포함하는 추상 클래스나 인터페이스이다. 각 메서드는 다른 종류의 객체를 생성한다.
+    - **ConcreteFactory**: AbstractFactory 클래스를 상속받아 구체적인 객체 집합을 생성하는 클래스이다.
+    - **AbstractProduct**: 생성될 객체의 추상 클래스나 인터페이스이다.
+    - **ConcreteProduct**: AbstractProduct 클래스를 상속받아 구체적인 객체를 생성하는 클래스이다.
 
-<br>
+![image](https://github.com/minsu20/CS_Study/assets/86006389/dd4f174b-2c41-487a-b96a-bcbfc30090e9)
 
-### **팩토리 패턴의 장점**
+**장점:**
 
-1. **유연성**: 팩토리 패턴을 사용하면, 특정 타입의 객체를 생성하는 로직을 한 곳에서 관리할 수 있습니다. 이는 코드의 유연성을 높이며, 코드 수정이 필요할 때 중복을 줄일 수 있자.
-2. **확장성**: 새로운 타입의 객체를 추가해야 할 경우, 팩토리 클래스만 수정하면 된다. 이는 코드의 확장성을 높여준다.
-3. 유지보수성 증가: 객체 생성과 비즈니스 로직을 분리함으로써 코드의 의존성을 줄일 수 있고 이로 인해 유지 보수성이 증가한다.
+1. **유연성**: 제품의 구체적인 클래스를 클라이언트 코드에서 분리한다.
+2. **일관성**: 한 팩토리에서 생성된 제품들은 잘 동작하도록 설계되었다.
 
-### **팩토리 패턴의 단점**
+**단점:**
 
-1. **클래스 수 증가**: 각각의 제품에 대한 클래스와 이를 생성하는 팩토리 클래스를 모두 만들어야 하므로, 클래스의 수가 증가합니다.
-2. **복잡성 증가**: 많은 수의 관련 클래스가 생기면서 코드의 복잡성이 증가할 수 있습니다.
+1. **클래스 수 증가**: 여러 제품군과 제품에 대한 클래스가 필요하여 클래스 수가 늘어날 수 있다.
+2. **제품 변경의 어려움**: 기존 제품군에 제품을 추가하거나 변경할 때 모든 팩토리 클래스를 수정해야 할 수도 있다.
+
+**예시**
+![image](https://github.com/minsu20/CS_Study/assets/86006389/c354fa7e-ab7a-41b9-b692-e4cf931cb877)
+
+### **차이점:**
+
+- **팩토리 메서드**는 단일 메서드를 통해 하나의 객체를 생성하는 반면, **추상 팩토리**는 관련된 객체의 집합을 생성하는 여러 메서드를 제공한다.
+- **팩토리 메서드**는 객체 생성을 서브 클래스에 위임하는 반면, **추상 팩토리**는 객체 생성을 관련된 객체 집합에 위임한다.
+- **추상 팩토리**는 시스템이 새로운 제품 집합을 쉽게 통합하거나 교체할 수 있도록 설계된다.
 
 <br>
 
